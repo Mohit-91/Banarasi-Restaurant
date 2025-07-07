@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Banarasi Restaurant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div id="popupContainer"></div>
+    </div>
+
+    <div class="navbar">
+        <div class="logo-area">
+            <img src="https://i.ibb.co/2P2r5F0/logo.png" alt="Logo" />
+            <h1>Banarasi Restaurant</h1>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchBar" placeholder="Search menu...">
+        </div>
+        
+        <div class="right-section">
+            <div class="home-icon" onclick="app.goHome()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#2c3e50" viewBox="0 0 24 24">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+            </div>
+            <div class="cart-icon" onclick="app.showCart()">🛒 <span id="cartCount">0</span></div>
+            <div class="user-pic" onclick="app.toggleDropdown()">
+                <img id="userImage" src="https://i.pravatar.cc/100" alt="User" />
+            </div>
+            <div class="dropdown-menu" id="userDropdown">
+                <button onclick="app.openOrderHistory()">Order History</button>
+                <button id="authButton"></button>
+                <button id="signupButton"></button>
+            </div>
+            <div class="cart-dropdown" id="cartDropdown">
+                <h2>Your Order</h2>
+                <ul id="cartList"></ul>
+                <div class="total" id="cartTotal">Total: ₹0</div>
+                <button class="checkout-btn" onclick="app.openCheckout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="restaurant" id="restaurant">
+        <div class="category-filters" id="categoryFilters">
+            </div>
+        <div class="menu-grid" id="menuGrid"></div>
+    </div>
+
+    <script src="script.js"></script> </body>
+</html>

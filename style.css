@@ -1,0 +1,593 @@
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #e3ffe7, #d9e7ff);
+}
+
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex; /* Use flexbox for main layout */
+    align-items: center; /* Vertically align items */
+    justify-content: space-between; /* Distribute space between logo, search, and right section */
+    z-index: 1000;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-area img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.logo-area h1 {
+    font-size: 1.5rem;
+    color: #e67e22;
+}
+
+/* New: Search Bar Container for Centering */
+.search-container {
+    flex-grow: 1; /* Allows it to take available space */
+    display: flex;
+    justify-content: center; /* Centers the search bar within its container */
+    margin: 0 20px; /* Add some margin from sides */
+}
+
+#searchBar {
+    padding: 8px 15px; /* Adjusted padding */
+    border-radius: 20px; /* More rounded corners */
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%; /* Take full width of its container */
+    max-width: 400px; /* Max width for better aesthetics */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow */
+    transition: all 0.3s ease;
+}
+
+#searchBar:focus {
+    border-color: #e67e22;
+    box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
+    outline: none;
+}
+
+/* Right Section for Icons */
+.right-section {
+    display: flex; /* Use flexbox for icons within this section */
+    align-items: center; /* Vertically align icons */
+    gap: 1rem; /* Space between icons */
+    position: relative; /* For dropdown positioning */
+}
+
+.cart-icon {
+    position: relative;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.cart-icon span {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 7px;
+    border-radius: 50%;
+    font-weight: 700;
+    border: 2px solid white;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.user-pic img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+
+.home-icon {
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.home-icon:hover {
+    background: #f1f1f1;
+}
+
+/* Dropdown Menus */
+.dropdown-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1002;
+    display: none;
+}
+
+.dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 0.7rem 1rem;
+    background: white;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+    background: #f1f1f1;
+}
+
+.cart-dropdown {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    width: 400px;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1003;
+    display: none;
+    flex-direction: column;
+}
+
+.cart-dropdown h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.cart-dropdown ul {
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
+.cart-dropdown ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 6px 0;
+}
+
+.cart-dropdown ul li span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cart-dropdown ul li input[type="number"] {
+    width: 60px;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9rem;
+    -moz-appearance: textfield;
+}
+.cart-dropdown ul li input[type="number"]::-webkit-outer-spin-button,
+.cart-dropdown ul li input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.cart-dropdown .total {
+    text-align: right;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #16a085;
+    margin-bottom: 1rem;
+}
+
+.cart-dropdown .checkout-btn,
+.checkout-container .place-order-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.cart-dropdown .checkout-btn:hover,
+.checkout-container .place-order-btn:hover {
+    background-color: #218838;
+}
+
+/* Popups (Auth Forms & Checkout & Admin & Order History & Reviews) */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1004;
+}
+
+.auth-container,
+.checkout-container,
+.order-history-container,
+.reviews-container {
+    width: 600px;
+    max-width: 90%;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.order-history-container,
+.reviews-container {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.auth-container h2,
+.checkout-container h2,
+.order-history-container h2,
+.reviews-container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.auth-container input,
+.auth-container button {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.auth-container input {
+    border: 1px solid #ccc;
+}
+
+.auth-container button {
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.auth-container button:hover {
+    background-color: #3498db;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #777;
+}
+
+.checkout-container ul {
+    list-style: none;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
+.checkout-container ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+    align-items: center;
+}
+
+.checkout-container ul li:last-child {
+    border-bottom: none;
+}
+
+.checkout-container .checkout-total {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: right;
+    margin-top: 1rem;
+    color: #e67e22;
+}
+
+
+
+/* Order History Specific Styles */
+.order-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #fcfcfc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.order-card h3 {
+    margin-top: 0;
+    color: #34495e;
+    font-size: 1.1rem;
+}
+.order-card p {
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+    color: #555;
+}
+.order-card .order-items ul {
+    list-style: disc;
+    margin-left: 20px;
+    margin-top: 5px;
+    color: #666;
+    font-size: 0.9rem;
+}
+.order-card .order-items li {
+    margin-bottom: 3px;
+}
+.order-status {
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
+.status-Pending { background-color: #ffc107; color: #333; }
+.status-Preparing { background-color: #17a2b8; color: white; }
+.status-Ready { background-color: #28a745; color: white; }
+.status-Completed { background-color: #6c757d; color: white; }
+
+
+
+/* Restaurant Menu Section */
+.restaurant {
+    max-width: 1000px;
+    margin: 6rem auto 3rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: filter 0.3s ease;
+}
+
+/* Category Filter Buttons */
+.category-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+}
+
+.category-filters button {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #e67e22;
+    border-radius: 20px;
+    background-color: white;
+    color: #e67e22;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.category-filters button:hover {
+    background-color: #fce4cc;
+}
+
+.category-filters button.active {
+    background-color: #e67e22;
+    color: white;
+    border-color: #e67e22;
+}
+
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.menu-item {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.menu-item .details {
+    padding: 1rem;
+}
+
+.menu-item .details h3 {
+    font-size: 1.1rem;
+    color: #34495e;
+}
+
+.menu-item .details .rating {
+    font-size: 1.1rem;
+    color: #f39c12; /* Star color */
+    margin-bottom: 5px;
+}
+/* Style for clickable rating area */
+.rating-clickable {
+    font-size: 1.1rem;
+    color: #f39c12; /* Star color */
+    margin-bottom: 5px;
+    cursor: pointer; /* Indicate it's clickable */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.rating-clickable small {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+}
+
+
+.menu-item .details p {
+    color: #7f8c8d;
+}
+
+.menu-item .details button {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #e67e22;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 100%; /* Make buttons full width */
+    margin-bottom: 5px; /* Spacing between buttons */
+}
+
+.menu-item .details button.view-reviews-btn {
+    background-color: #3499db; /* Different color for view reviews */
+}
+
+.menu-item .details button:hover {
+    background-color: #d35400;
+}
+.menu-item .details button.view-reviews-btn:hover {
+    background-color: #2980b9;
+}
+
+
+/* Reviews Container Specific Styles */
+.reviews-container .average-rating {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #f39c12;
+    margin-bottom: 1rem;
+}
+.reviews-container .average-rating span {
+    font-size: 1.2rem;
+    color: #333;
+    margin-left: 10px;
+}
+
+.reviews-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+.review-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.review-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+.review-item .stars {
+    color: #f39c12;
+    margin-bottom: 5px;
+}
+.review-item p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+.add-review-form h3 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+.add-review-form .star-rating-input {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    gap: 5px;
+}
+.add-review-form .star-rating-input .star {
+    cursor: pointer;
+    color: #ccc; /* Default star color */
+    transition: color 0.2s ease;
+}
+.add-review-form .star-rating-input .star.selected {
+    color: #f39c12; /* Selected star color */
+}
+.add-review-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    min-height: 80px;
+    resize: vertical;
+}
+.add-review-form button {
+    background-color: #1abc9c;
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease;
+}
+.add-review-form button:hover {
+    background-color: #16a085;
+}
+
+
+/* Utility Class */
+.blur {
+    filter: blur(4px);
+    pointer-events: none;
+}
