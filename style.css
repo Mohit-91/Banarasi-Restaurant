@@ -1,4 +1,4 @@
-/* Base Styles */
+/* Base Styles - Apply to all screen sizes by default */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -8,6 +8,9 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(to right, #e3ffe7, #d9e7ff);
+    line-height: 1.6; /* Improved readability */
+    color: #333;
+    overflow-x: hidden; /* Prevent horizontal scroll on small screens */
 }
 
 /* Navbar Styles */
@@ -18,16 +21,18 @@ body {
     background: white;
     padding: 1rem 2rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    display: flex; /* Use flexbox for main layout */
-    align-items: center; /* Vertically align items */
-    justify-content: space-between; /* Distribute space between logo, search, and right section */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     z-index: 1000;
+    flex-wrap: nowrap; /* Prevent wrapping by default on larger screens */
 }
 
 .logo-area {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .logo-area img {
@@ -39,24 +44,27 @@ body {
 .logo-area h1 {
     font-size: 1.5rem;
     color: #e67e22;
+    white-space: nowrap;
+    overflow: hidden; /* Prevent text overflow if needed on small screens */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
 }
 
-/* New: Search Bar Container for Centering */
+/* Search Bar Container */
 .search-container {
-    flex-grow: 1; /* Allows it to take available space */
+    flex-grow: 1;
     display: flex;
-    justify-content: center; /* Centers the search bar within its container */
-    margin: 0 20px; /* Add some margin from sides */
+    justify-content: center;
+    margin: 0 20px;
 }
 
 #searchBar {
-    padding: 8px 15px; /* Adjusted padding */
-    border-radius: 20px; /* More rounded corners */
+    padding: 8px 15px;
+    border-radius: 20px;
     border: 1px solid #ccc;
     font-size: 1rem;
-    width: 100%; /* Take full width of its container */
-    max-width: 400px; /* Max width for better aesthetics */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow */
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transition: all 0.3s ease;
 }
 
@@ -68,16 +76,24 @@ body {
 
 /* Right Section for Icons */
 .right-section {
-    display: flex; /* Use flexbox for icons within this section */
-    align-items: center; /* Vertically align icons */
-    gap: 1rem; /* Space between icons */
-    position: relative; /* For dropdown positioning */
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .cart-icon {
     position: relative;
     font-size: 1.8rem;
     cursor: pointer;
+    padding: 5px; /* Added padding for easier click */
+    border-radius: 50%; /* Make clickable area round */
+    transition: background-color 0.2s ease;
+}
+
+.cart-icon:hover {
+    background-color: #f0f0f0;
 }
 
 .cart-icon span {
@@ -92,24 +108,40 @@ body {
     font-weight: 700;
     border: 2px solid white;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    min-width: 20px; /* Ensure badge size */
+    text-align: center;
+    display: flex; /* For perfect centering of number */
+    align-items: center;
+    justify-content: center;
+    line-height: 1; /* Prevent extra line height */
 }
 
+.user-pic {
+    padding: 5px; /* Added padding for easier click */
+    border-radius: 50%; /* Make clickable area round */
+    transition: background-color 0.2s ease;
+}
+.user-pic:hover {
+    background-color: #f0f0f0;
+}
 .user-pic img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
     cursor: pointer;
+    display: block; /* Remove extra space below image */
 }
 
 
 .home-icon {
     cursor: pointer;
-    padding: 6px;
-    border-radius: 8px;
+    padding: 8px; /* Increased padding for better hit area */
+    border-radius: 50%; /* Make clickable area round */
     transition: background 0.2s ease;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .home-icon:hover {
@@ -122,28 +154,41 @@ body {
     top: 60px;
     right: 0;
     background: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Stronger shadow */
     border-radius: 8px;
     overflow: hidden;
     z-index: 1002;
     display: none;
+    min-width: 180px; /* Slightly wider for better text fit */
+    transform-origin: top right;
+    animation: fadeInScale 0.2s ease-out forwards; /* Simple animation */
 }
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
 
 .dropdown-menu button {
     display: block;
     width: 100%;
-    padding: 0.7rem 1rem;
+    padding: 0.7rem 1.2rem; /* Increased padding */
     background: white;
     border: none;
     text-align: left;
-    font-size: 1rem;
+    font-size: 0.95rem; /* Slightly smaller font */
+    color: #333;
     cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .dropdown-menu button:hover {
-    background: #f1f1f1;
+    background: #f5f5f5;
+    color: #e67e22;
 }
 
+/* Cart Dropdown - Uses fixed positioning for reliable centering */
 .cart-dropdown {
     position: fixed;
     top: 50%;
@@ -151,26 +196,38 @@ body {
     transform: translate(-50%, -50%);
     background: white;
     width: 400px;
+    max-width: 90%;
     padding: 1.5rem;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); /* Stronger shadow */
     z-index: 1003;
     display: none;
     flex-direction: column;
+    animation: fadeInPop 0.3s ease-out forwards;
+    max-height: 90vh; /* Ensure it doesn't overflow vertically */
+    overflow-y: auto; /* Allow internal scrolling if content is too long */
+}
+
+@keyframes fadeInPop {
+    from { opacity: 0; transform: translate(-50%, -40%) scale(0.9); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
 .cart-dropdown h2 {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem; /* More space */
     color: #2c3e50;
+    font-size: 1.6rem;
 }
 
 .cart-dropdown ul {
     list-style: none;
     padding: 0;
-    max-height: 200px;
+    max-height: 250px; /* Increased height */
     overflow-y: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
 }
 
 .cart-dropdown ul li {
@@ -178,23 +235,52 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #eee;
-    padding: 6px 0;
+    padding: 8px 0; /* More padding */
+    font-size: 1rem;
+    color: #555;
+    flex-wrap: wrap; /* Allow wrapping for long item names */
+}
+.cart-dropdown ul li:last-child {
+    border-bottom: none;
 }
 
 .cart-dropdown ul li span {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px; /* More gap */
+    flex-shrink: 0; /* Prevent quantity controls from shrinking */
+    margin-top: 5px; /* space if wraps */
 }
 
+.cart-dropdown ul li button {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 28px; /* Fixed button size */
+    height: 28px;
+    font-size: 1.2rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+.cart-dropdown ul li button:hover {
+    background-color: #ddd;
+}
+
+
 .cart-dropdown ul li input[type="number"] {
-    width: 60px;
-    padding: 4px 8px;
+    width: 50px; /* Adjusted width */
+    padding: 4px 0px; /* Centered text within */
     border: 1px solid #ccc;
     border-radius: 4px;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     -moz-appearance: textfield;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 .cart-dropdown ul li input[type="number"]::-webkit-outer-spin-button,
 .cart-dropdown ul li input[type="number"]::-webkit-inner-spin-button {
@@ -204,84 +290,110 @@ body {
 
 .cart-dropdown .total {
     text-align: right;
-    margin-top: 10px;
+    margin-top: 15px; /* More space */
     font-weight: bold;
     color: #16a085;
-    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-top: 1px solid #eee; /* Separator */
+    padding-top: 10px;
+    margin-bottom: 1.2rem;
 }
 
 .cart-dropdown .checkout-btn,
-.checkout-container .place-order-btn {
+.checkout-container .place-order-btn,
+.add-review-form button { /* Grouping button styles */
     background-color: #28a745;
     color: white;
-    padding: 0.8rem;
+    padding: 0.8rem 1.5rem; /* More padding */
     border: none;
     border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
     width: 100%;
     text-align: center;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .cart-dropdown .checkout-btn:hover,
-.checkout-container .place-order-btn:hover {
+.checkout-container .place-order-btn:hover,
+.add-review-form button:hover {
     background-color: #218838;
+    transform: translateY(-1px);
+}
+.cart-dropdown .checkout-btn:active,
+.checkout-container .place-order-btn:active,
+.add-review-form button:active {
+    transform: translateY(0);
+    box-shadow: none;
 }
 
-/* Popups (Auth Forms & Checkout & Admin & Order History & Reviews) */
+
+/* Popups Overlay */
 .popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.4);
-    display: none;
-    justify-content: center;
-    align-items: center;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    display: none; /* Hidden by default, shown by JS */
     z-index: 1004;
+    backdrop-filter: blur(3px); /* Subtle blur effect on background */
+    -webkit-backdrop-filter: blur(3px); /* For Safari support */
 }
 
+/* Auth Container (Sign Up/Login) and other similar popups */
 .auth-container,
 .checkout-container,
 .order-history-container,
 .reviews-container {
-    width: 600px;
-    max-width: 90%;
+    position: fixed; /* Use fixed positioning for reliable centering */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the element perfectly */
     background: #fff;
+    width: 600px; /* Desired width for larger screens */
+    max-width: calc(100% - 40px); /* Limit width on smaller screens, leaving 20px padding on each side */
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-    position: relative;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    z-index: 1005; /* Higher than overlay */
+    animation: fadeInPop 0.3s ease-out forwards;
+    max-height: calc(100vh - 40px); /* Limit height to viewport minus 20px top/bottom padding */
+    overflow-y: auto; /* Enable vertical scrolling within the container */
 }
 
-.order-history-container,
-.reviews-container {
-    max-height: 80vh;
-    overflow-y: auto;
-}
 
 .auth-container h2,
 .checkout-container h2,
 .order-history-container h2,
 .reviews-container h2 {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem; /* More space */
     color: #2c3e50;
+    font-size: 2rem;
+    font-weight: 600;
 }
 
 .auth-container input,
 .auth-container button {
     width: 100%;
-    padding: 0.8rem;
+    padding: 0.9rem; /* More padding */
     margin-bottom: 1rem;
     border-radius: 8px;
     font-size: 1rem;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inner shadow */
 }
 
 .auth-container input {
     border: 1px solid #ccc;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.auth-container input:focus {
+    border-color: #e67e22;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), 0 0 0 3px rgba(230, 126, 34, 0.2);
+    outline: none;
 }
 
 .auth-container button {
@@ -289,35 +401,47 @@ body {
     color: white;
     border: none;
     cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .auth-container button:hover {
     background-color: #3498db;
+    transform: translateY(-1px);
+}
+.auth-container button:active {
+    transform: translateY(0);
+    box-shadow: none;
 }
 
 .close-btn {
     position: absolute;
-    top: 10px;
+    top: 15px; /* Position relative to the popup container */
     right: 15px;
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Larger close button */
     cursor: pointer;
     color: #777;
+    transition: color 0.2s;
+}
+.close-btn:hover {
+    color: #333;
 }
 
 .checkout-container ul {
     list-style: none;
     padding: 0;
-    max-height: 300px;
+    max-height: 350px; /* Increased height */
     overflow-y: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .checkout-container ul li {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
+    padding: 10px 0; /* More padding */
     border-bottom: 1px dashed #eee;
     align-items: center;
+    font-size: 1.05rem;
+    color: #444;
 }
 
 .checkout-container ul li:last-child {
@@ -326,49 +450,60 @@ body {
 
 .checkout-container .checkout-total {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.4rem; /* Larger total */
     text-align: right;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     color: #e67e22;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-bottom: 1.5rem;
 }
-
-
 
 /* Order History Specific Styles */
 .order-card {
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px; /* More rounded corners */
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
     background-color: #fcfcfc;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08); /* Stronger shadow */
+    transition: transform 0.2s ease;
 }
+.order-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.12);
+}
+
 .order-card h3 {
     margin-top: 0;
     color: #34495e;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 0.5rem;
 }
 .order-card p {
-    margin-bottom: 5px;
-    font-size: 0.95rem;
+    margin-bottom: 8px; /* More space */
+    font-size: 1rem;
     color: #555;
 }
 .order-card .order-items ul {
-    list-style: disc;
-    margin-left: 20px;
+    list-style: inside disc; /* Disc inside the list item */
+    margin-left: 0; /* Remove default margin */
     margin-top: 5px;
     color: #666;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 }
 .order-card .order-items li {
     margin-bottom: 3px;
 }
 .order-status {
     font-weight: bold;
-    padding: 4px 8px;
-    border-radius: 5px;
+    padding: 6px 10px; /* More padding */
+    border-radius: 20px; /* Pill shape */
     display: inline-block;
     margin-top: 10px;
+    font-size: 0.9rem;
 }
 .status-Pending { background-color: #ffc107; color: #333; }
 .status-Preparing { background-color: #17a2b8; color: white; }
@@ -376,15 +511,14 @@ body {
 .status-Completed { background-color: #6c757d; color: white; }
 
 
-
 /* Restaurant Menu Section */
 .restaurant {
-    max-width: 1000px;
+    max-width: 1200px; /* Increased max-width for larger screens */
     margin: 6rem auto 3rem;
-    padding: 2rem;
+    padding: 2.5rem; /* More padding */
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Stronger shadow */
     transition: filter 0.3s ease;
 }
 
@@ -393,193 +527,226 @@ body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 1.5rem;
+    gap: 12px; /* More gap */
+    margin-bottom: 2rem; /* More space below */
     padding: 0 1rem;
 }
 
 .category-filters button {
-    padding: 0.6rem 1.2rem;
+    padding: 0.7rem 1.4rem; /* More padding */
     border: 1px solid #e67e22;
-    border-radius: 20px;
+    border-radius: 25px; /* More rounded */
     background-color: white;
     color: #e67e22;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    font-size: 1rem;
 }
 
 .category-filters button:hover {
     background-color: #fce4cc;
+    transform: translateY(-2px);
 }
 
 .category-filters button.active {
     background-color: #e67e22;
     color: white;
     border-color: #e67e22;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transform: translateY(0); /* Remove hover effect for active */
+}
+.category-filters button:active {
+    transform: translateY(0);
 }
 
 
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly larger min-width */
+    gap: 2rem; /* More gap between items */
 }
 
 .menu-item {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 15px; /* More rounded */
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.menu-item:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .menu-item img {
     width: 100%;
-    height: 180px;
+    height: 200px; /* Slightly taller images */
     object-fit: cover;
 }
 
 .menu-item .details {
-    padding: 1rem;
+    padding: 1.2rem; /* More padding */
 }
 
 .menu-item .details h3 {
-    font-size: 1.1rem;
+    font-size: 1.3rem; /* Larger font */
     color: #34495e;
+    margin-bottom: 0.5rem;
 }
 
 .menu-item .details .rating {
-    font-size: 1.1rem;
+    font-size: 1.2rem; /* Larger stars */
     color: #f39c12; /* Star color */
     margin-bottom: 5px;
 }
 /* Style for clickable rating area */
 .rating-clickable {
-    font-size: 1.1rem;
+    font-size: 1.2rem; /* Consistent star size */
     color: #f39c12; /* Star color */
-    margin-bottom: 5px;
-    cursor: pointer; /* Indicate it's clickable */
+    margin-bottom: 10px; /* More space below */
+    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px; /* More gap */
+    padding: 5px 0; /* Make clickable area larger */
 }
 .rating-clickable small {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #7f8c8d;
+}
+.rating-clickable:hover {
+    color: #e67e22; /* Hover effect for rating */
 }
 
 
 .menu-item .details p {
     color: #7f8c8d;
+    font-size: 1rem;
+    margin-bottom: 1rem;
 }
 
 .menu-item .details button {
     margin-top: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem; /* Adjusted padding */
     background-color: #e67e22;
     border: none;
     color: white;
-    border-radius: 6px;
-    font-size: 0.9rem;
+    border-radius: 8px; /* More rounded */
+    font-size: 1rem;
     cursor: pointer;
-    width: 100%; /* Make buttons full width */
-    margin-bottom: 5px; /* Spacing between buttons */
+    width: 100%;
+    margin-bottom: 10px; /* Spacing between buttons */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
 
 .menu-item .details button.view-reviews-btn {
-    background-color: #3499db; /* Different color for view reviews */
+    background-color: #3499db;
 }
 
 .menu-item .details button:hover {
     background-color: #d35400;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 .menu-item .details button.view-reviews-btn:hover {
     background-color: #2980b9;
+}
+.menu-item .details button:active {
+    transform: translateY(0);
+    box-shadow: none;
 }
 
 
 /* Reviews Container Specific Styles */
 .reviews-container .average-rating {
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 2rem; /* Larger */
     color: #f39c12;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
 }
 .reviews-container .average-rating span {
-    font-size: 1.2rem;
+    font-size: 1.4rem; /* Larger */
     color: #333;
     margin-left: 10px;
 }
 
 .reviews-list {
-    max-height: 300px;
+    max-height: 350px; /* Increased height */
     overflow-y: auto;
     border-bottom: 1px solid #eee;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 .review-item {
-    background-color: #f9f9f9;
+    background-color: #fefefe;
     border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin-bottom: 12px; /* More space */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
 .review-item strong {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px; /* More space */
     color: #2c3e50;
+    font-size: 1.1rem;
 }
 .review-item .stars {
     color: #f39c12;
-    margin-bottom: 5px;
+    font-size: 1.1rem; /* Consistent star size */
+    margin-bottom: 8px;
 }
 .review-item p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #555;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .add-review-form h3 {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     color: #2c3e50;
+    font-size: 1.5rem;
 }
 .add-review-form .star-rating-input {
     display: flex;
     justify-content: center;
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    gap: 5px;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem; /* Larger stars for input */
+    gap: 8px;
 }
 .add-review-form .star-rating-input .star {
     cursor: pointer;
-    color: #ccc; /* Default star color */
-    transition: color 0.2s ease;
+    color: #ccc;
+    transition: color 0.2s ease, transform 0.1s ease;
+}
+.add-review-form .star-rating-input .star:hover {
+    transform: scale(1.1);
 }
 .add-review-form .star-rating-input .star.selected {
-    color: #f39c12; /* Selected star color */
+    color: #f39c12;
 }
 .add-review-form textarea {
     width: 100%;
-    padding: 0.8rem;
+    padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
     margin-bottom: 1rem;
-    min-height: 80px;
+    min-height: 100px; /* Taller textarea */
     resize: vertical;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+.add-review-form textarea:focus {
+    border-color: #e67e22;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), 0 0 0 3px rgba(230, 126, 34, 0.2);
+    outline: none;
 }
 .add-review-form button {
     background-color: #1abc9c;
-    color: white;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 .add-review-form button:hover {
     background-color: #16a085;
@@ -590,4 +757,222 @@ body {
 .blur {
     filter: blur(4px);
     pointer-events: none;
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+/* For screens smaller than 1024px (Laptops to Tablets) */
+@media (max-width: 1024px) {
+    .restaurant {
+        max-width: 95%; /* Use more width on slightly smaller screens */
+        padding: 2rem;
+    }
+    .menu-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Slightly smaller items */
+        gap: 1.5rem;
+    }
+}
+
+
+/* For screens smaller than 768px (common for tablets in portrait and most phones) */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap; /* Allow items to wrap to the next line */
+        padding: 0.8rem 1rem; /* Smaller padding */
+        justify-content: center; /* Center items for single-column feel */
+    }
+
+    .logo-area {
+        width: 100%; /* Take full width */
+        justify-content: center; /* Center logo */
+        margin-bottom: 10px; /* Space below logo */
+        font-size: 1.2rem; /* Smaller font for h1 */
+    }
+
+    .search-container {
+        order: 3; /* Move search bar to the bottom on mobile */
+        width: 100%; /* Take full width */
+        margin: 10px 0; /* Adjust margin */
+    }
+
+    #searchBar {
+        max-width: 100%; /* Allow search bar to fill available width */
+        font-size: 0.95rem; /* Smaller font */
+        padding: 6px 12px;
+    }
+
+    .right-section {
+        order: 2; /* Place icons directly below logo */
+        width: 100%; /* Take full width */
+        justify-content: space-around; /* Distribute icons evenly */
+        margin-top: 10px; /* Space above icons */
+        gap: 0.5rem; /* Reduce gap between icons */
+    }
+
+    .cart-icon, .user-pic, .home-icon {
+        font-size: 1.5rem; /* Slightly smaller icons */
+        padding: 4px; /* Reduced padding */
+    }
+
+    .user-pic img {
+        width: 35px; /* Smaller user image */
+        height: 35px;
+    }
+
+    .dropdown-menu {
+        top: 115px; /* Adjust dropdown position relative to collapsed navbar */
+        right: 1rem; /* Keep it on the right */
+        min-width: unset; /* Remove min-width restriction */
+        width: 160px; /* Set a fixed width for better control */
+        padding: 0.5rem 0; /* Reduced padding for dropdown buttons */
+    }
+    .dropdown-menu button {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .restaurant {
+        margin-top: 10rem; /* More space from the top for the taller navbar */
+        padding: 1.2rem; /* Smaller padding */
+    }
+
+    .category-filters {
+        gap: 8px; /* Slightly smaller gap for buttons */
+        justify-content: center; /* Center categories */
+        margin-bottom: 1.5rem;
+    }
+
+    .category-filters button {
+        padding: 0.5rem 1rem; /* Smaller padding for buttons */
+        font-size: 0.9rem; /* Smaller font for buttons */
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr; /* Single column layout for menu items */
+        gap: 1.2rem; /* Smaller gap between menu items */
+    }
+    .menu-item img {
+        height: 160px; /* Shorter images on mobile */
+    }
+    .menu-item .details h3 {
+        font-size: 1.2rem;
+    }
+    .menu-item .details .rating, .rating-clickable {
+        font-size: 1.1rem;
+    }
+    .menu-item .details p {
+        font-size: 0.95rem;
+    }
+    .menu-item .details button {
+        font-size: 0.95rem;
+        padding: 0.6rem 1rem;
+    }
+
+    /* Adjust popups for smaller screens */
+    .auth-container,
+    .checkout-container,
+    .order-history-container,
+    .reviews-container {
+        padding: 1rem; /* Reduced padding for smaller screens */
+        max-width: calc(100% - 20px); /* Even tighter max-width to ensure no horizontal scroll on very small screens */
+        max-height: calc(100vh - 20px); /* Tighter max-height for very small screens */
+    }
+
+    .auth-container h2,
+    .checkout-container h2,
+    .order-history-container h2,
+    .reviews-container h2 {
+        font-size: 1.5rem; /* Smaller heading */
+        margin-bottom: 1rem;
+    }
+
+    .auth-container input,
+    .auth-container button {
+        padding: 0.7rem; /* Smaller padding for inputs/buttons */
+        font-size: 0.95rem; /* Smaller font size */
+        margin-bottom: 0.8rem;
+    }
+
+    .cart-dropdown {
+        padding: 1rem;
+    }
+    .cart-dropdown h2 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+    .cart-dropdown ul li {
+        flex-direction: column; /* Stack name and quantity controls */
+        align-items: flex-start;
+        padding: 10px 0;
+    }
+    .cart-dropdown ul li span {
+        width: 100%; /* Make quantity controls take full width */
+        justify-content: flex-end; /* Align to the right */
+        margin-top: 8px;
+    }
+    .cart-dropdown .total {
+        font-size: 1.1rem;
+    }
+
+    .reviews-container .average-rating {
+        font-size: 1.5rem; /* Smaller average rating text */
+    }
+    .reviews-list {
+        max-height: 250px; /* Adjust height */
+    }
+    .add-review-form .star-rating-input {
+        font-size: 2rem; /* Smaller stars for input */
+    }
+}
+
+/* For very small screens (e.g., iPhone SE, older phones) */
+@media (max-width: 480px) {
+    .logo-area h1 {
+        font-size: 1rem; /* Even smaller font size for logo */
+    }
+
+    .cart-icon, .user-pic, .home-icon {
+        font-size: 1.2rem; /* Even smaller icons */
+        padding: 2px;
+    }
+
+    .user-pic img {
+        width: 30px; /* Even smaller user image */
+        height: 30px;
+    }
+
+    .cart-icon span {
+        font-size: 0.6rem; /* Smaller cart count badge */
+        padding: 2px 5px;
+        min-width: 16px;
+    }
+
+    .restaurant {
+        margin-top: 9rem; /* Adjust margin for very small screens if navbar compresses more */
+    }
+
+    .category-filters button {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.7rem;
+    }
+
+    .menu-item .details h3 {
+        font-size: 1rem; /* Smaller menu item headings */
+    }
+    
+    /* Further adjustments for very small screens */
+    .auth-container,
+    .checkout-container,
+    .order-history-container,
+    .reviews-container {
+        padding: 0.8rem; /* Even smaller padding */
+        max-width: calc(100% - 16px); /* Even tighter max-width with 8px on each side */
+    }
+    .auth-container h2,
+    .checkout-container h2,
+    .order-history-container h2,
+    .reviews-container h2 {
+        font-size: 1.2rem; /* Even smaller heading */
+        margin-bottom: 0.8rem;
+    }
 }
